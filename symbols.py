@@ -1,9 +1,21 @@
-# doesn't do integer division for 1/2
-from __future__ import division 
+# init_session()
+# These commands were executed:
+from __future__ import division
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+
 
 # http://docs.sympy.org/latest/tutorial/intro.html
 from sympy import *
 a,b,u,mu,y = symbols('a,b,u,mu,y');
+z_i = Indexed('z',i)
+z = IndexedBase('z')
+z2_i = z[i] # for some reason the recommended way to create indexed...
+z3_i = symbols('z_i')
+z_i == z2_i == z3_i
 expr = (a-b)**2
 e = expr.replace(a,(y-mu))
 e = e.replace(b,(mu-u))
@@ -44,6 +56,9 @@ expr = sympify('a**2+bx+c')
 i = symbols(i)
 summation(1/2**i, (i,0,oo)) # solves summation
 Sum(1/2**i, (i,0,oo))
+Sum(Indexed('x',i),(i,1,3)) # indexed x
+Sum(Indexed('x',i),(i,1,3)).doit() # x[1] + x[2] + x[3]
+Sum(x(i),(i,1,3)).doit() # x(1) + x(2) + x(3)
 
 # simplification
 #################
